@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|VT323|Oswald');
+
+body{
+    margin-top: 50px;
+    text-align: center;
+    font-family: sans-serif;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; 
+}
+
+.push{
+    border: 12px solid #333;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+}
+
+.unclickable{
+    pointer-events: none;
+}
+
+.top-left{
+    background-color: #00a74a;
+    border-top-left-radius: 100%;
+}
+.top-right{
+    background-color: #9f0f17;
+    border-top-right-radius: 100%;
+}
+.top-right:active, .top-right.active{
+    background-color: #FC0102;
+}
+.top-left:active, .top-left.active{
+    background-color: #13ff7c;
+}
+.bottom-left:active, .bottom-left.active{
+    background-color : #fed93f;
+}
+.bottom-right:active, .bottom-right.active{
+    background-color : #1c8cff;
+}
+.bottom-left{
+    background-color: #cca707;
+    border-bottom-left-radius: 100%;
+}
+.bottom-right{
+    background-color: blue;
+    border-bottom-right-radius: 100%;
+}
+
+div.center{
+    display: inline-block;
+}
+
+div.center{
+    position: relative;
+    width: 220px;
+    height: 220px;
+    top: -345px;
+    border-radius: 100%;
+    background-color: white;
+    border: 12px solid #333;
+}
+
+h3.brand{
+    font-family: 'Alfa Slab One', fantasy;
+    font-size: 3em;
+    margin-top: 30px;
+    font-weight: normal;
+}
+
+h3.brand>span.registered{
+    font-size: 0.3em;
+    position: relative;
+    top: -20px;
+}
+
+div.row{
+    margin-top: -40px;
+    font-family: 'Oswald',Arial,sans;
+}
+
+div.row>div{
+    display: inline-block;
+    font-size: 10px;
+}
+
+div.count-btn{
+    width: 50px;
+    line-height: 30px;
+    font-family: 'VT323', monospace;
+    font-weight: bold;
+    font-size: 3em;
+    color:white;
+    background-color: #32050C;
+    border: 5px solid #333;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+div.count-btn.off{
+    color: #333;
+}
+
+div.start-btn,div.strict-btn{
+    margin-bottom: 5px;
+    width:20px;
+    height:20px;
+    border-radius: 50%;
+    border: 5px solid #333;
+}
+
+div.start-btn{
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: red;
+}
+
+div.strict-btn{
+    background-color: yellow;
+}
+
+div.start-btn.on{
+    box-shadow: 0px 0px 10px red;
+}
+
+div.strict-led{
+    position: relative;
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid black;
+    width: 6px;
+    height: 6px;
+    left: 10px;
+    top: -3px;
+}
+
+div.strict-led.on{
+   background-color: red;
+}
+
+div.switch-slot>div{
+    display:inline-block;
+    vertical-align: middle;
+    font-size: 10px;
+}
+
+div.switch-label{
+    font-family: 'Oswald',Arial,sans;
+}
+
+div.switch-slot{
+    margin-top: 10px;
+}
+
+div.switch-btn{
+    width: 40px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 4px;
+    border: 0px solid #333;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+div.switch-btn>div{
+    display:inline-block;
+    position: relative;
+    background-color: cyan;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #333;
+    border-radius: 4px;
+}
+
+div.switch-btn>.on{
+    left: 10px;
+}
+
+div.switch-btn>.off{
+    left: -10px;
+}
