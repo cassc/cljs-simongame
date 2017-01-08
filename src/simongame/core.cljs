@@ -10,6 +10,7 @@
 (enable-console-print!)
 
 (def success-count 3)
+(def timeout-val 5000)
 (defonce finished-colors (atom []))
 (defonce pending-colors (atom []))
 (defonce staging-colors (atom []))
@@ -59,20 +60,35 @@
   ([xs]
    (async-do-seq xs 1000 200)))
 
+(defn start-game!
+  ([]
+   (start-game! nil nil))
+  ([pre-play post-play]
+   (let [c (rand-color)]
+     (reset! finished-colors [])
+     (async-do-seq (filter identity [:mon-off pre-play c post-play :mon-on]))
+     (swap! play-state assoc :start true :win false)
+     (reset! pending-colors [c])
+     (reset! staging-colors []))))
+
 (defn notify-win! []
   (put! tos :mon-off)
   (async-do-seq [:pause :green :red :blue :yellow] 150 10)
   (swap! play-state assoc :win true :start false :strict false))
 
 (defn notify-error! []
-  (reset! pending-colors (vec (concat @staging-colors @pending-colors)))
-  (reset! staging-colors [])
-  (async-do-seq (concat [:mon-off :error] @pending-colors [:mon-on])))
+  (put! tos :mon-off)
+  (if-not (:strict @play-state)
+    (do
+      (reset! pending-colors (vec (concat @staging-colors @pending-colors)))
+      (reset! staging-colors [])
+      (async-do-seq (concat [:error] @pending-colors [:mon-on])))
+    (start-game! :error :pause)))
 
 (defn timeout-check []
   (let [mon (atom nil)]
     (go-loop []
-      (let [[v ch] (alts! [tos (timeout 3000)])]
+      (let [[v ch] (alts! [tos (timeout timeout-val)])]
         (println (js/Date.) v)
         (if-not v
           (when (and @mon (:start @play-state))
@@ -103,16 +119,6 @@
                 (reset! pending-colors (conj @finished-colors (rand-color)))
                 (async-do-seq (vec (concat [:mon-off :pause] @pending-colors [:mon-on])))))))
         (notify-error!)))))
-
-(defn start-game!
-  ([]
-   (start-game! false))
-  ([strict?]
-   (let [c (rand-color)]
-     (reset! finished-colors [])
-     (async-do-seq [:mon-off c :mon-on])
-     (swap! play-state assoc :start true :strict strict? :win false)
-     (reset! pending-colors [c]))))
 
 (defn color-button []
   (fn [location color]
