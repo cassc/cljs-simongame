@@ -9,7 +9,7 @@
 
 (enable-console-print!)
 
-(def success-count 3)
+(def success-count 20)
 (def timeout-val 5000)
 (defonce finished-colors (atom []))
 (defonce pending-colors (atom []))
